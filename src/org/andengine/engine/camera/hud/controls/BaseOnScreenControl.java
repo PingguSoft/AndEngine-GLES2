@@ -130,6 +130,10 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 	public void enableReleaseKnob(boolean release) {
 		mReleaseKnob = release;
 	}
+	
+	public void setControlKnobYPosition(float Y) {
+		this.mControlValueY = Y;
+	}
 
 	/**
 	 *  When the touch happened outside of the bounds of this OnScreenControl.
