@@ -131,6 +131,10 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 		mReleaseKnob = release;
 	}
 	
+	public void setControlKnobXPosition(float X) {
+		this.mControlValueX = X;
+	}
+	
 	public void setControlKnobYPosition(float Y) {
 		this.mControlValueY = Y;
 	}
