@@ -27,6 +27,7 @@ import org.andengine.util.Constants;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.system.SystemUtils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
@@ -34,6 +35,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.FrameLayout.LayoutParams;
 
 /**
@@ -66,13 +68,13 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-
+	
 	@Override
 	protected void onCreate(final Bundle pSavedInstanceState) {
 		if(BuildConfig.DEBUG) {
 			Debug.d(this.getClass().getSimpleName() + ".onCreate" + " @(Thread: '" + Thread.currentThread().getName() + "')");
 		}
-
+	
 		super.onCreate(pSavedInstanceState);
 
 		this.mGamePaused = true;
@@ -223,9 +225,23 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		this.mGamePaused = false;
 	}
-
+	
+	@SuppressLint("NewApi")
 	@Override
 	public synchronized void onWindowFocusChanged(final boolean pHasWindowFocus) {
+		final int currentApiVersion = android.os.Build.VERSION.SDK_INT;
+		
+	    super.onWindowFocusChanged(pHasWindowFocus);
+	    if (currentApiVersion >= 19 && pHasWindowFocus) {
+	        getWindow().getDecorView().setSystemUiVisibility(
+	                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+	                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+	                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+	                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+	                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+	                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+	    }
+	    
 		super.onWindowFocusChanged(pHasWindowFocus);
 
 		if(pHasWindowFocus && this.mGamePaused && this.mGameCreated) {

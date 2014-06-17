@@ -45,7 +45,7 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 
 	private int mActivePointerID = INVALID_POINTER_ID;
 	
-	private boolean mReleaseKnob = true;
+	protected boolean mReleaseKnob = true;
 
 	// ===========================================================
 	// Constructors

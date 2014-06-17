@@ -77,17 +77,14 @@ public class AnalogOnScreenControl extends BaseOnScreenControl implements IClick
 		return super.onHandleControlBaseTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 	}
 
-	private float prevRelativeY = 0;
-	
 	@Override
 	protected void onUpdateControlKnob(final float pRelativeX, final float pRelativeY) {
-		if(pRelativeY == prevRelativeY || (pRelativeX * pRelativeX + pRelativeY * pRelativeY <= 0.25f)) {
+		if(mReleaseKnob == false || (pRelativeX * pRelativeX + pRelativeY * pRelativeY <= 0.25f)) {
 			super.onUpdateControlKnob(pRelativeX, pRelativeY);
 		} else {
 			final float angleRad = MathUtils.atan2(pRelativeY, pRelativeX);
 			super.onUpdateControlKnob(FloatMath.cos(angleRad) * 0.5f, FloatMath.sin(angleRad) * 0.5f);
 		}
-		prevRelativeY = pRelativeY;
 	}
 
 	// ===========================================================
