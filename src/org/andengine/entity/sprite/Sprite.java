@@ -125,8 +125,10 @@ public class Sprite extends RectangularShape {
 	}
 	
 	public void setTextureRegion(final ITextureRegion pTextureRegion) {
-		this.mTextureRegion = pTextureRegion;
-		this.onUpdateTextureCoordinates();
+		if (pTextureRegion != this.mTextureRegion) {
+			this.mTextureRegion = pTextureRegion;
+			this.onUpdateTextureCoordinates();
+		}
 	}
 
 	public boolean isFlippedHorizontal() {
