@@ -41,7 +41,7 @@ import android.widget.FrameLayout.LayoutParams;
 /**
  * (c) 2010 Nicolas Gramlich
  * (c) 2011 Zynga Inc.
- * 
+ *
  * @author Nicolas Gramlich
  * @since 11:27:06 - 08.03.2010
  */
@@ -68,18 +68,18 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	// ===========================================================
 	// Constructors
 	// ===========================================================
-	
+
 	@Override
 	protected void onCreate(final Bundle pSavedInstanceState) {
 		if(BuildConfig.DEBUG) {
 			Debug.d(this.getClass().getSimpleName() + ".onCreate" + " @(Thread: '" + Thread.currentThread().getName() + "')");
 		}
-	
+
 		super.onCreate(pSavedInstanceState);
 
 		this.mGamePaused = true;
 
-		this.mEngine = this.onCreateEngine(this.onCreateEngineOptions());
+		this.mEngine = this.onCreateEngine(this.onCreateEngineOptions(pSavedInstanceState));
 		this.mEngine.startUpdateThread();
 
 		this.applyEngineOptions();
@@ -225,12 +225,12 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 
 		this.mGamePaused = false;
 	}
-	
+
 	@SuppressLint("NewApi")
 	@Override
 	public synchronized void onWindowFocusChanged(final boolean pHasWindowFocus) {
 		final int currentApiVersion = android.os.Build.VERSION.SDK_INT;
-		
+
 	    super.onWindowFocusChanged(pHasWindowFocus);
 	    if (currentApiVersion >= 19 && pHasWindowFocus) {
 	        getWindow().getDecorView().setSystemUiVisibility(
@@ -241,7 +241,7 @@ public abstract class BaseGameActivity extends BaseActivity implements IGameInte
 	                        | View.SYSTEM_UI_FLAG_FULLSCREEN
 	                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
 	    }
-	    
+
 		super.onWindowFocusChanged(pHasWindowFocus);
 
 		if(pHasWindowFocus && this.mGamePaused && this.mGameCreated) {
