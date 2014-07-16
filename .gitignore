@@ -24,6 +24,8 @@ gdbserver
 
 # Eclipse:
 .settings
+.classpath
+.properties
 
 # IntelliJ / Android Studio:
 idea/workspace.xml
