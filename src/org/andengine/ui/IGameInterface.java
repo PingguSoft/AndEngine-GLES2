@@ -4,12 +4,10 @@ import org.andengine.engine.Engine;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.entity.scene.Scene;
 
-import android.os.Bundle;
-
 /**
- * (c) 2010 Nicolas Gramlich
+ * (c) 2010 Nicolas Gramlich 
  * (c) 2011 Zynga Inc.
- *
+ * 
  * @author Nicolas Gramlich
  * @since 12:03:08 - 14.03.2010
  */
@@ -22,8 +20,7 @@ public interface IGameInterface {
 	// Methods
 	// ===========================================================
 
-	//public EngineOptions onCreateEngineOptions();
-	public EngineOptions onCreateEngineOptions(final Bundle pSavedInstanceState);
+	public EngineOptions onCreateEngineOptions();
 	public Engine onCreateEngine(final EngineOptions pEngineOptions);
 
 	public void onCreateResources(final OnCreateResourcesCallback pOnCreateResourcesCallback) throws Exception;

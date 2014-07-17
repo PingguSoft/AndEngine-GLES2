@@ -4,8 +4,6 @@ import org.andengine.engine.Engine;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.entity.scene.Scene;
 
-import android.os.Bundle;
-
 
 /**
  * This class exists to provide exact backward naming compatibility to older versions of {@link BaseGameActivity}.
@@ -46,7 +44,7 @@ public abstract class LegacyBaseGameActivity extends BaseGameActivity {
 	protected abstract Scene onLoadComplete();
 
 	@Override
-	public final EngineOptions onCreateEngineOptions(final Bundle pSavedInstanceState) {
+	public final EngineOptions onCreateEngineOptions() {
 		return null;
 	}
 
