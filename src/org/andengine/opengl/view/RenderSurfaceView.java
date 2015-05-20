@@ -2,7 +2,9 @@ package org.andengine.opengl.view;
 
 import org.andengine.engine.Engine;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.PixelFormat;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 
@@ -33,12 +35,14 @@ public class RenderSurfaceView extends GLSurfaceView {
 		super(pContext);
 
 		this.setEGLContextClientVersion(2);
+		this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 	}
 
 	public RenderSurfaceView(final Context pContext, final AttributeSet pAttrs) {
 		super(pContext, pAttrs);
 
 		this.setEGLContextClientVersion(2);
+		this.getHolder().setFormat(PixelFormat.TRANSLUCENT);
 	}
 
 	// ===========================================================
@@ -59,7 +63,8 @@ public class RenderSurfaceView extends GLSurfaceView {
 	/**
 	 * @see android.view.View#measure(int, int)
 	 */
-	@Override
+	@SuppressLint("WrongCall")
+    @Override
 	protected void onMeasure(final int pWidthMeasureSpec, final int pHeightMeasureSpec) {
 		if(this.isInEditMode()) {
 			super.onMeasure(pWidthMeasureSpec, pHeightMeasureSpec);
