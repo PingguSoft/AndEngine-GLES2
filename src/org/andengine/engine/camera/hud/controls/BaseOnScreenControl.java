@@ -46,6 +46,7 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 	private int mActivePointerID = INVALID_POINTER_ID;
 	
 	protected boolean mReleaseKnob = true;
+	protected int mControlMargin = 0;
 
 	// ===========================================================
 	// Constructors
@@ -138,6 +139,10 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 	public void setControlKnobYPosition(float Y) {
 		this.mControlValueY = Y;
 	}
+	
+	public void setControlBaseMargin(int margin) {
+	    this.mControlMargin = margin;
+	}
 
 	/**
 	 *  When the touch happened outside of the bounds of this OnScreenControl.
@@ -210,7 +215,7 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 
 		final float[] controlBaseSceneCenterCoordinates = controlBase.getSceneCenterCoordinates();
 		final float x = controlBaseSceneCenterCoordinates[VERTEX_INDEX_X] - controlKnob.getWidth() * 0.5f + pRelativeX * controlBase.getWidthScaled();
-		final float y = controlBaseSceneCenterCoordinates[VERTEX_INDEX_Y] - controlKnob.getHeight() * 0.5f + pRelativeY * controlBase.getHeightScaled();
+		final float y = controlBaseSceneCenterCoordinates[VERTEX_INDEX_Y] - controlKnob.getHeight() * 0.5f + pRelativeY * (controlBase.getHeightScaled() - mControlMargin);
 
 		controlKnob.setPosition(x, y);
 	}
