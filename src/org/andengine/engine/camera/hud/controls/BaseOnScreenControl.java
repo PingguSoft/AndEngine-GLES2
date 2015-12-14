@@ -47,6 +47,7 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 	
 	protected boolean mReleaseKnob = true;
 	protected int mControlMargin = 0;
+	private boolean mKnobPressed = false;
 
 	// ===========================================================
 	// Constructors
@@ -88,7 +89,7 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 	// Getter & Setter
 	// ===========================================================
 
-	public Sprite getControlBase() {
+    public Sprite getControlBase() {
 		return this.mControlBase;
 	}
 
@@ -98,6 +99,10 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 
 	public IOnScreenControlListener getOnScreenControlListener() {
 		return this.mOnScreenControlListener;
+	}
+	
+	public boolean isControlKnobPressed() {
+	    return this.mKnobPressed;
 	}
 
 	// ===========================================================
@@ -172,6 +177,8 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 				if(this.mActivePointerID == INVALID_POINTER_ID) {
 					this.mActivePointerID = pointerID;
 					this.updateControlKnob(pTouchAreaLocalX, pTouchAreaLocalY);
+					this.mKnobPressed = true;
+					BaseOnScreenControl.this.mOnScreenControlListener.onControlKnobChange(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 					return true;
 				}
 				break;
@@ -180,6 +187,8 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 				if(this.mActivePointerID == pointerID) {
 					this.mActivePointerID = INVALID_POINTER_ID;
 					this.onHandleControlKnobReleased();
+					this.mKnobPressed = false;
+					BaseOnScreenControl.this.mOnScreenControlListener.onControlKnobChange(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 					return true;
 				}
 				break;
@@ -239,5 +248,6 @@ public abstract class BaseOnScreenControl extends HUD implements IOnSceneTouchLi
 		 * @param pValueY between <code>-1</code> (up) to <code>1</code> (down).
 		 */
 		public void onControlChange(final BaseOnScreenControl pBaseOnScreenControl, final float pValueX, final float pValueY);
+        public void onControlKnobChange(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY);
 	}
 }
